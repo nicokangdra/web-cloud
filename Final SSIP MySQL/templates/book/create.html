@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}
+Add Book
+{% endblock %}
+
+{% block content %}
+<form method="POST" enctype = "multipart/form-data">
+    <div class="row mt-3 mb-3">
+        <label for="name" class="col-2 col-form-label">Name</label>
+        <div class="col-6">
+            <input type="text" name="name" id="name" class="form-control" placeholder="Book Name" required/>
+        </div>
+    </div>
+    <div class="row mt-3 mb-3">
+        <label for="category_id" class="col-2 col-form-label">Category</label>
+        <div class="col-6">
+            <div class="input-group">
+                <select class="custom-select" name="category_id" id="category_id" required>
+                    <option disabled selected>Select Categories</option>
+                    {% for id, name in categories %}
+                    <option value="{{ id }}">{{ name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-3 mb-3">
+        <label for="description" class="col-2 col-form-label">Description</label>
+        <div class="col-6">
+            <textarea rows="8" cols="100" name="body" id="body"></textarea>
+        </div>
+    </div>
+
+    <div class="row mt-3 mb-3">
+        <label for="description" class="col-2 col-form-label">File (PDF)</label>
+        <div class="col-6">
+            <input type="file" accept="application/pdf" id="file" name="file" class="form-control">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="offset-2 col-6">
+            <button class="btn btn-success" type="submit" name="btnCreate" id="btnCreate">Add</button>
+        </div>
+    </div>
+</form>
+
+<div>
+    <a href="{{ url_for('list_books') }}">Back to Books</a>
+</div>
+{% endblock %}

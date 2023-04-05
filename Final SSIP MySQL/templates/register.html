@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block title %}
+Log In
+{% endblock %}
+
+{% block content %}
+
+<form method="POST">
+    <br>
+    <h2 style="text-align: center;">Registration</h2>
+    <div class="row-mb-3">
+        <label for="name" class="col-2 col-form-label">Name</label>
+        <div class="col-6">
+            <input type="text" name="Rname" class="form-control" required/>
+        </div>
+    </div>
+
+    <div class="row-mb-3">
+        <label for="username" class="col-2 col-form-label">Username</label>
+        <div class="col-6">
+            <input type="text" name="Rusername" class="form-control" required/>
+        </div>
+    </div>
+
+    <div class="row-mb-3">
+        <label for="type" class="col-2 col-form-label">Type</label>
+        <div class="col-6">
+            <select name="type" class="form-select" required>
+                <option disabled selected>Select account type</option>
+                <option value="user">User</option>
+                <option value="admin">Admin</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="row-mb-3">
+        <label for="password" class="col-2 col-form-label">Password</label>
+        <div class="col-6">
+            <input type="password" name="Rpassword" id="password" class="form-control" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}"/>
+            <span style="color: red; font-size: 14px;" id="chr">Contain at least 5 character</span>
+            <span style="color: red; font-size: 14px; margin-left: 70px;" id="up">Contain 1 Uppercase</span><br>
+            <span style="color: red; font-size: 14px;" id="lw">Contain 1 lowercase</span>
+            <span style="color: red; font-size: 14px; margin-left: 114px;" id="nm">Contain 1 number</span>
+            <script>
+                document.getElementById("password").addEventListener("keyup", function() {
+                var Value = document.getElementById("password").value;
+                if(Value != Value.toLowerCase()) document.getElementById("up").style.color = "green";
+                else document.getElementById("up").style.color = "red";
+
+                if(Value != Value.toUpperCase()) document.getElementById("lw").style.color = "green";
+                else document.getElementById("lw").style.color = "red";
+                
+                if(/\d/.test(Value)) document.getElementById("nm").style.color = "green";
+                else document.getElementById("nm").style.color = "red";
+
+                if(Value.length >= 5) document.getElementById("chr").style.color = "green";
+                else document.getElementById("chr").style.color = "red";
+                });
+            </script>
+        </div>
+    </div>
+
+    <div class="row-mb-3">
+        <label for="passwordcon" class="col-2 col-form-label">Confirm Password</label>
+        <div class="col-6">
+            <input type="password" id="pwcon" name="passwordcon" class="form-control" required/>
+        </div>
+    </div>
+
+    <br/>
+
+    <div class="row">
+        <div class="col-6">
+            <input type="submit" id="sbsm" value="Register" class="btn btn-success" />
+        </div>
+    </div>
+    <br>
+</form>
+
+{% for message in get_flashed_messages() %}
+<h2 style="color: red;">{{ message }}</h2>
+{% endfor %}
+<br>
+
+{% endblock %}

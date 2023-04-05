@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}
+Users Management
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row mt-3">
+        {% if not users %}
+        <p>
+            <h2>No users</h2>
+        </p>
+        {% else %}
+        <h3>Name : {{users[3]}}</h3>
+        <h3>Username : {{users[1]}}</h3>
+        <h3>Type : {{users[2]}}</h3>
+        <table class="table table-sm table-borderless">
+            <thead>          
+                <tr>
+                    <td>
+                        <br>
+                        <a class="btn btn-primary" href="{{ url_for('edit_user', user_id=users[0]) }}">Change Password</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <a class="btn btn-danger" href="{{ url_for('delete_user', user_id=users[0]) }}">Delete Account</a>
+                    </td>
+                </tr>
+                
+            </thead>
+        </table>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

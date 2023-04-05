@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}
+{% if book %}
+{{ book[1] }}
+{% else %}
+Flask App
+{% endif %}
+
+{% endblock %}
+
+{% block content %}
+<br>
+<div class="row">
+    {% if book %}
+    <h2>{{ book[1] }}</h2>
+    <p>
+        {{ book[3] }}
+    </p>
+    <div>
+    <a class="btn btn-primary" href="{{ url_for('view_book_detail', book_id=book[0]) }}" target="_blank">
+        View Book
+    </a>
+    </div>
+    {% else %}
+    <h3>
+        Invalid book
+    </h3>
+    {% endif %}
+</div>
+<br>
+<div>
+    <a href="{{ url_for('list_books') }}">Back to Books</a>
+</div>
+{% endblock %}
