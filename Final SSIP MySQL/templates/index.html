@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}
+Home
+{% endblock %}
+
+{% block content %}
+
+<div style="text-align: center;">
+<br>
+<div class="container pt-2">
+    <form class="d-flex" method="post">
+        <input class="form-control me-2" type="text" id="livebox" name="livebox" placeholder="Search Book">
+        <button class="btn btn-primary" type="submit">Search</button>
+    </form>
+    <br>
+    <h5 style="text-align: left; margin-left: 10%;">
+        {% if res and session and session.get('username') %}
+            {% for name, id, lower in res %}
+            <li>
+                <a href="/book/view/{{id}}">{{name}}</a>
+            </li>
+            {% endfor %}
+        {% elif res %}
+            <a href="{{ url_for('login') }}">Login to View</a>
+        {% endif %}
+    </h5>
+</div>
+<div class="container mt-5">
+    <div class="row mt-3">
+        <h2 style="font-weight: bold;" >Welcome to Nick's Library</h2>
+    </div>
+</div>
+<div class="container mt-3">
+    <h4>Rules & Regulation : </h4>
+    <p>
+        1. Login to view books <br>
+        2. Share must include the source <br>
+        3. Remember content of this site is free <br>
+        4. Have fun :)
+    </p>
+</div>
+<div style="font-weight: bold;">
+    <br>
+    {% if session and session.get('username') %}
+    <p>Hi {{session['name']}}, Welcome to Library</p>
+    <a class="btn btn-danger" onclick="confirms()" >Log Out</a>
+    {% else %}
+    Get Started :<br><br> 
+    <a class="btn btn-success" href="{{ url_for('login') }}">Login</a>
+    <a class="btn btn-success" href="{{ url_for('registerpage') }}">Register</a>
+    {% endif %}
+</div>
+</div>
+{% endblock %}

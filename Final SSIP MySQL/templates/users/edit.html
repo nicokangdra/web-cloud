@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block title %}
+Edit Users
+{% endblock %}
+
+{% block content %}
+<br>
+<form action="{{ url_for('edit_user', user_id=users[0]) }}" method="POST">
+    <h4>Username : {{ users[1] }} </h4>
+    <h4>User Type : {{ users[2] }}</h4>
+
+    <div class="row-mb-3">
+        <label for="pwnow" class="col-2 col-form-label">Current Password</label>
+        <div class="col-6">
+            <input type="password" name="pwnow" class="form-control" required/>
+        </div>
+    </div>
+
+    <div class="row-mb-3">
+        <label for="password" class="col-2 col-form-label">Change Password</label>
+        <div class="col-6">
+            <input type="password" name="Rpassword" id="password" class="form-control" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}"/>
+            <span style="color: red; font-size: 14px;" id="chr">Contain at least 5 character</span>
+            <span style="color: red; font-size: 14px; margin-left: 70px;" id="up">Contain 1 Uppercase</span><br>
+            <span style="color: red; font-size: 14px;" id="lw">Contain 1 lowercase</span>
+            <span style="color: red; font-size: 14px; margin-left: 114px;" id="nm">Contain 1 number</span>
+            <script>
+                document.getElementById("password").addEventListener("keyup", function() {
+                var Value = document.getElementById("password").value;
+                if(Value != Value.toLowerCase()) document.getElementById("up").style.color = "green";
+                else document.getElementById("up").style.color = "red";
+
+                if(Value != Value.toUpperCase()) document.getElementById("lw").style.color = "green";
+                else document.getElementById("lw").style.color = "red";
+                
+                if(/\d/.test(Value)) document.getElementById("nm").style.color = "green";
+                else document.getElementById("nm").style.color = "red";
+
+                if(Value.length >= 5) document.getElementById("chr").style.color = "green";
+                else document.getElementById("chr").style.color = "red";
+                });
+            </script>
+        </div>
+    </div>
+
+    <div class="row-mb-3">
+        <label for="passwordcon" class="col-2 col-form-label">Confirm Password</label>
+        <div class="col-6">
+            <input type="password" name="passwordcon" class="form-control" required/>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-6">
+            <input type="submit" value="Change Password" class="btn btn-success" />
+        </div>
+    </div>
+</form>
+<br>
+
+{% for message in get_flashed_messages() %}
+<h2 style="color: red;">{{ message }}</h2>
+<br>
+{% endfor %}
+
+<div>
+    <a href="{{ url_for('user_manage') }}">Back to Account</a>
+</div>
+{% endblock %}
