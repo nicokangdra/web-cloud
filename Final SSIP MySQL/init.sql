@@ -6,7 +6,8 @@ CREATE TABLE books (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     description VARCHAR(100),
-    file VARCHAR(100)
+    file VARCHAR(100),
+    category_id INT NOT NULL
 );
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
