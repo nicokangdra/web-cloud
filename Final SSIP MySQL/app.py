@@ -477,4 +477,4 @@ def delete_user(user_id):
     return render_template('users/delete.html',users=users)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True,host="0.0.0.0")
