@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}
+Delete user
+{% endblock %}
+
+{% block content %}
+<form action="/user/delete/{{ users[0] }}" method="POST">
+    <div class="row mt-3 mb-3">
+        <h3 id="apaa" style="color: red;">Type "{{users[1]}}" to Delete Account !!</h3>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <input type="text" name="capps" id="capps" placeholder="{{users[1]}}"><br><br>
+            <button class="btn btn-danger" id="delete" type="submit">Delete</button>
+        </div>
+    </div>
+</form>
+<script>
+    document.getElementById("delete").disabled=true;
+    document.getElementById("capps").addEventListener("keyup",function(){
+        var a = document.getElementById("capps").value;
+        if(a == "{{users[1]}}") document.getElementById("delete").disabled=false;
+        else document.getElementById("delete").disabled=true;
+    })
+</script>
+<br>
+<div>
+    <a href="{{ url_for('user_manage') }}">Back to Account</a>
+</div>
+{% endblock %}

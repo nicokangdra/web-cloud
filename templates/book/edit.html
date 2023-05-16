@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}
+Edit book
+{% endblock %}
+
+{% block content %}
+<br>
+<form action="{{ url_for('edit_book', book_id=book[0]) }}" method="POST" enctype = "multipart/form-data">
+    <div class="row mt-3 mb-3">
+        <label for="name" class="col-2 col-form-label">Name</label>
+        <div class="col-6">
+            <input type="text" name="name" id="name" class="form-control" placeholder="book Name" value="{{ book[1] }}" required/>
+        </div>
+    </div>
+    <div class="row mt-3 mb-3">
+        <label for="category_id" class="col-2 col-form-label">Category</label>
+        <div class="col-6">
+            <div class="input-group">
+                <!-- pay a good attention, we add 'selected' if the category_id = book[2] (category_id) -->
+                <select class="custom-select" name="category_id" id="category_id" required>
+                    {% for id, name in categories %}
+                    <option value="{{ id }}" {{ 'selected' if book and id == book[2] }}>{{ name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-3 mb-3">
+        <label for="description" class="col-2 col-form-label">Description</label>
+        <div class="col-6">
+            <textarea rows="8" cols="100" name="body" id="body">{{ book[3] }}</textarea>
+        </div>
+    </div>
+
+    <div class="row mt-3 mb-3">
+        <label for="description" class="col-2 col-form-label">Update File (PDF)</label>
+        <div class="col-6">
+            <input type="file" accept="application/pdf" id="file" name="file" class="form-control">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="offset-2 col-6">
+            <button class="btn btn-success" type="submit" name="btnEdit" id="btnEdit">Update</button>
+        </div>
+    </div>
+</form>
+<br>
+<div>
+    <a class="" href="{{ url_for('list_books') }}">Back to books</a>
+</div>
+<br>
+{% endblock %}
